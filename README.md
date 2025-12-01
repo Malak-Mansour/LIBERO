@@ -16,11 +16,11 @@ PUSH TO GITHUB REPO STEPS:
     git push -u origin master
 
 
-
-git config --global user.email "mim7995@nyu.edu"
-git config --global user.name "Malak-Mansour"
-git add .
-git commit -m "create new OOD task and evaluate sim env"
+Commit new changes:
+    git config --global user.email "mim7995@nyu.edu"
+    git config --global user.name "Malak-Mansour"
+    git add .
+    git commit -m "create new OOD task and evaluate sim env"
 
 
 To evaluate ID or OOD tasks and save their sim videos: libero/lifelong/evaluate_openpi.py
