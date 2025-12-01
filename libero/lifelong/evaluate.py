@@ -1,3 +1,42 @@
+'''
+EVALUATE ON LIBERO'S POLICIES, BUT WEIGHTS ARE NOT RELEASED
+
+conda deactivate
+source ../openpi/.venv/bin/activate
+
+python benchmark_scripts/download_libero_datasets.py --use-huggingface
+OR
+python benchmark_scripts/download_libero_datasets.py --datasets libero_spatial --use-huggingface
+
+uv pip install hydra-core==1.3.2 omegaconf==2.3.0
+uv pip install -e .
+python -m ensurepip 
+/home/malak/thesis/openpi/.venv/bin/pip3 install 'robomimic==0.2.0' --no-cache-dir --no-build-isolation
+
+python3 libero/lifelong/evaluate.py \
+    --benchmark LIBERO_SPATIAL \
+    --task_id 3 \
+    --algo bc \
+    --policy pi0.5_libero \
+    --seed 0 \
+    --ep 100 \
+    --load_task False \
+    --device_id 0 \
+    --save-videos
+
+PYTHONPATH=/home/malak/thesis/LIBERO:$PYTHONPATH \
+/home/malak/thesis/openpi/.venv/bin/python -m libero.lifelong.evaluate \
+  --benchmark libero_spatial \
+  --task_id 3 \
+  --algo base \
+  --policy bc_transformer_policy \
+  --seed 0 \
+  --load_task 0 \
+  --device_id 0 \
+  --save-videos
+
+'''
+
 import argparse
 import sys
 import os

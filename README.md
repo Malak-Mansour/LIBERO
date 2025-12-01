@@ -1,3 +1,39 @@
+PUSH TO GITHUB REPO STEPS:
+    git remote remove origin 
+    git remote add origin git@github.com:Malak-Mansour/LIBERO.git 
+    git branch 
+
+    ls ~/.ssh
+    ssh-keygen -t ed25519 -C "your_email@example.com"
+    eval "$(ssh-agent -s)"
+    ssh-add ~/.ssh/id_ed25519
+    cat ~/.ssh/id_ed25519.pub
+    copy the line, then go to GitHub → Settings → SSH and GPG keys → New SSH key
+        Give it any name "franka real deploy", Paste the key → Save
+    ssh -T git@github.com
+
+    create a repo on my github with the name LIBERO
+    git push -u origin master
+
+
+
+git config --global user.email "mim7995@nyu.edu"
+git config --global user.name "Malak-Mansour"
+git add .
+git commit -m "create new OOD task and evaluate sim env"
+
+
+To evaluate ID or OOD tasks and save their sim videos: libero/lifelong/evaluate_openpi.py
+
+The newly created OOD tasks involve:
+    libero/libero/bddl_files/libero_custom/pick_up_the_water_bottle_and_stack_it_on_the_white_box.bddl
+    scripts/generate_custom_init_states.py
+    libero/libero/benchmark/libero_suite_task_map.py
+    libero/libero/benchmark/libero_custom.py
+
+Teleop by keyboard: scripts/record_real_demo.py
+
+
 <div align="center">
 <img src="https://github.com/Lifelong-Robot-Learning/LIBERO/blob/master/images/libero_logo.png" width="360">
 

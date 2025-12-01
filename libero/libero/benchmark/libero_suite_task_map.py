@@ -139,4 +139,7 @@ libero_task_map = {
         "STUDY_SCENE4_pick_up_the_book_on_the_right_and_place_it_on_the_cabinet_shelf",
         "STUDY_SCENE4_pick_up_the_book_on_the_right_and_place_it_under_the_cabinet_shelf",
     ],
+    "libero_custom": [
+        "pick_up_the_water_bottle_and_stack_it_on_the_white_box",
+    ],
 }

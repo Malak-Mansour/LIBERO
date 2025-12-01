@@ -59,6 +59,7 @@ libero_suites = [
     "libero_goal",
     "libero_90",
     "libero_10",
+    "libero_custom",
 ]
 task_maps = {}
 max_len = 0
@@ -67,13 +68,15 @@ for libero_suite in libero_suites:
 
     for task in libero_task_map[libero_suite]:
         language = grab_language_from_filename(task + ".bddl")
+        # Most suites use pruned_init; custom suite uses .init directly.
+        init_suffix = ".pruned_init" if libero_suite != "libero_custom" else ".init"
         task_maps[libero_suite][task] = Task(
             name=task,
             language=language,
             problem="Libero",
             problem_folder=libero_suite,
             bddl_file=f"{task}.bddl",
-            init_states_file=f"{task}.pruned_init",
+            init_states_file=f"{task}{init_suffix}",
         )
 
         # print(language, "\n", f"{task}.bddl", "\n")
@@ -114,7 +117,8 @@ class Benchmark(abc.ABC):
 
     def _make_benchmark(self):
         tasks = list(task_maps[self.name].values())
-        if self.name == "libero_90":
+        # Custom (non-10-task) suites keep declared order; 10-task suites use a shuffled order list.
+        if self.name == "libero_90" or len(tasks) != 10:
             self.tasks = tasks
         else:
             print(f"[info] using task orders {task_orders[self.task_order_index]}")
@@ -216,4 +220,12 @@ class LIBERO_100(Benchmark):
     def __init__(self, task_order_index=0):
         super().__init__(task_order_index=task_order_index)
         self.name = "libero_100"
+        self._make_benchmark()
+
+
+@register_benchmark
+class LIBERO_CUSTOM(Benchmark):
+    def __init__(self, task_order_index=0):
+        super().__init__(task_order_index=task_order_index)
+        self.name = "libero_custom"
         self._make_benchmark()
